@@ -15,8 +15,13 @@
 /* 슬라이더 */
 .new_items{text-align: center;}
 .new_items .slider{width: 100%;}
+/* 추천상품 */
 .good_items{text-align: center;}
 .good_items .slider{width: 100%;}
+.c_good_img{transition: transform, 0.5s;}
+.c_good_img:hover{transform: scale(1.05);}
+/* 상품 종류별 보기 */
+
 </style>
 <script>
 	//슬라이더(slider), 캐러셀(carousel)
@@ -81,7 +86,7 @@
 					<h3>추천상품</h3>
 					<div class="slider">
 						<%for(ProductDTO product : goodProductList){ %>
-						<a href="shopContent.jsp?product_id=<%=product.getProduct_id()%>"><img src="/images_ezenmall/<%=product.getProduct_image() %>" ></a>
+						<a href="shopContent.jsp?product_id=<%=product.getProduct_id()%>"><img src="/images_ezenmall/<%=product.getProduct_image() %>" class="c_good_img"></a>
 					<%} %>
 					</div>
 				</article>

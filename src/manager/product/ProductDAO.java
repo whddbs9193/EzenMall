@@ -107,6 +107,27 @@ public class ProductDAO {
 			}
 			return cnt;
 		}
+		
+		// 상품 분류별 조회 메소드 - shopMain.jsp
+		public int getProductCount(String product_kind) {
+			String sql="select count(*) from product where product_kind = ?";
+			int cnt = 0;
+			
+			try {
+				conn = JDBCUtil.getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, product_kind);
+				rs = pstmt.executeQuery();
+				rs.next();
+				cnt = rs.getInt(1);
+			}catch(Exception e) {
+				System.out.println("getProductCount(product_kind) 메소드: " + e.getMessage());
+				e.printStackTrace();
+			}finally {
+				JDBCUtil.close(conn, pstmt, rs);
+			}
+			return cnt;
+		}
 	
 	// 전체 상품 조회 메소드 - 페이징 처리, 검색 처리를 함
 	public List<ProductDTO> getProductList(int startRow, int pageSize){
@@ -315,17 +336,18 @@ public class ProductDAO {
 		return productList;
 	}
 	
-	// 상품 종류보기 메소드 shopmain.jsp
-	
-	public List<ProductDTO> getProductList(String product_kind){
+	// 상품 종류보기 메소드 - 페이징 처리 shopMain.jsp
+	public List<ProductDTO> getProductList(int startRow, int pageSize, String product_kind){
 		List<ProductDTO> productList = new ArrayList<ProductDTO>();
 		ProductDTO product = null;
-		String sql = "select * from product where product_kind = ?";
+		String sql = "select * from product where product_kind = ? order by product_id desc limit ?, ?";
 		
 		try{
 			conn = JDBCUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, product_kind);
+			pstmt.setInt(2, startRow-1);
+			pstmt.setInt(3, pageSize);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {

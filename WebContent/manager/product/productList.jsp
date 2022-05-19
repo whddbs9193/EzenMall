@@ -101,7 +101,7 @@ if(search.equals("1")) {
 	cnt = productDAO.getProductCount(s_search,i_search);
 }else if(search.equals("0")){ 
 	productList = productDAO.getProductList(startRow, pageSize);
-	cnt = productDAO.getProductCount();
+	cnt = productList.size();
 }
 
 // 매 페이지마다 전체 상품수에 대한 역순 번호
