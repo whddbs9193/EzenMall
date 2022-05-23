@@ -6,27 +6,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Koulen&family=Nanum+Pen+Script&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Koulen&family=Nanum+Pen+Script&family=Permanent+Marker&display=swap');
 /* 전체 레이아웃 */
-.top a{text-decoration: none; }
+.top a{text-decoration: none; color: ; color:#7bb0db;}
 .t_box1, .t_box2, .t_box3, .t_box4{display:inline-block; padding: 2%;}
 .t_box1, .t_box3{width: 65%;}
 .t_box2, .t_box4{width: 25%;}
 /* 구역1(상단 좌측) 타이틀, 검색 */
-.t_box1 .m_title{font-family: 'Permanent Marker', cursive; font-size: 3em;}
-.t_box1 .s_title{font-family: 'Nanum Pen Script', cursive; font-size: 1.5em;}
+.t_box1 .m_title{font-family: 'Permanent Marker', cursive; font-size: 2.8em; text-align: center;}
+.t_box1 .s_title{font-family: 'Nanum Pen Script', cursive; font-size: 1.4em; text-align: center;}
+.t_box1 .t_search{width: 400px; text-align: center; margin-top: 15px; margin-left: 180px; 
+border: 1px solid #000; border-radius: 35px; padding: 5px;}
+.t_box1 .t_search #keyword{height:38px; width: 300px; border:none;font-size: 1.1em; font-size: 0.9em;}
+.t_box1 .t_search #keyword:focus{outline: none; }
+.t_box1 .t_search button{border: none; background: #fff; cursor: pointer;}
 /* 구역2(상단 우츨) 회원정보, 구매정보, 장바구니정보 */
+.t_box2{float:right; text-align: right; line-height: 100px;}
 .t_box2 .t_b2_img1:hover{content: url('../../icons/user2.png');}
 .t_box2 .t_b2_img2:hover{content: url('../../icons/buy2.png');}
 .t_box2 .t_b2_img3:hover{content: url('../../icons/cart2.png');}
 
 /* 구역3(하단 좌측) 메인메뉴(하위메뉴) */
-.t_box3{ }
-.t_box3 div{display: inline-block; padding: 10px; margin-right:10px; color: #a6615a; font-weight: bold; font-family: 'Dongle', sans-serif; font-size: 2em;}
-.t_box3 .m_menu0{padding: 2px; position: relative; top: 8px;}
-.t_box3 .m_menu_img:hover{content: url('../../icons/menu2.png');}
-.t_box3 .sub{display: none;}
-.t_box3 .main:hover .t_box3 .sub{display: block;}
+.t_box3{float: left; position: relative;}
+.m_menu0{display: inline-block; width: 30px;}
+.m_menu0:hover{content: url('../../icons/menu2.png'); width:30px;}
+.m_menu{display: inline-block;}
+.m_menu a{font-family: 'Dongle', sans-serif; font-size: 1.9em; color: #a6615a; width:100px; padding: 5px; margin:5px; font-weight: bold;}
+.s_menu{display:none; position:absolute; top:55px; width:119px; z-index: 10; background: #e9e1f4;}
 
+.m_menu a:hover{color: purple; text-shadow: 1px 1px 1px lightgray;}
+.m_menu:hover .s_menu{display: block;}
+.s_menu div {padding: 10px 0;}
+.s_menu div a{font-family: '고딕'; font-size: 0.9em; color: #000;}
+.s_menu div a:hover{font-weight: bold; font-size: 1.0em; text-shadow: 1px 1px 1px gray;}
 /* 구역4(하단 우측) 로그인, 회원가입, 고객센터 */
+.t_box4{ float: right; text-align: right;}
+.t_box4 a{color: black;}
+.top_end{clear: both;}
 
 </style>
 <script>
@@ -38,59 +52,73 @@
 		<div class="s_title">책과 함께 인생의 지혜를...</div>
 		<div class="t_search">
 			<form action="" method="post" name="searchForm">
-				<input type="search" name="keyword" id="keyword">
-				<button type="submit"></button>
+				<input type="search" name="keyword" id="keyword" placeholder="인생책을 입력하세요.">
+				<button type="submit"><img src="../../icons/search.png" width="25" height="25"></button>
 			</form>
 		</div>
 	</div>
 	<div class="t_box2"> <%-- 구역2(상단 우측): 회원정보, 구매정보, 장바구니정보 --%>
-		<a><img src="../../icons/user1.png" width="30" title="회원정보" class="t_b2_img1"></a>
-		<a><img src="../../icons/buy1.png" width="30" title="구매정보" class="t_b2_img2"></a>
-		<a><img src="../../icons/cart1.png" width="30" title="장바구니정보" class="t_b2_img3"></a>
+		<a><img src="../../icons/user1.png" width="40" title="회원정보" class="t_b2_img1"></a>&emsp;&emsp;
+		<a><img src="../../icons/buy1.png" width="40" title="구매정보" class="t_b2_img2"></a>&emsp;&emsp;
+		<a><img src="../../icons/cart1.png" width="40" title="장바구니정보" class="t_b2_img3"></a>
 	</div>	
 	<div class="t_box3"> <%-- 구역3(하단 좌측): 메인메뉴(하위메뉴) --%>
 		<div class="m_menu0"><a href="#"><img src="../../icons/menu1.png" width="25" class="m_menu_img"></a></div>
-		<div class="m_menu1"><a href="#">소설/시</a></div>     <%-- 100번대 main --%>
-		<div class="s_menu1 sub">
-			<div>소설/시</div>
-			<div>에세이</div>
+		<div class="m_menu mm1">
+			<a href="#">소설/시</a>
+			<div class="s_menu sm1">
+				<div><a href="shopAll.jsp?product_kind=110#t_kind">소설/시</a></div>
+				<div><a href="shopAll.jsp?product_kind=120#t_kind">에세이</a></div>
+			</div>
 		</div>
-		<div class="m_menu2 main"><a href="#">인문</a></div>		  <%-- 200번대 main --%>
-		<div class="s_menu2 sub">
-			<div>역사</div>
-			<div>예술</div>
-			<div>종교</div>
-			<div>사회</div>
-			<div>과학</div>
+		<div class="m_menu mm2">
+			<a href="#">인문</a>
+			<div class="s_menu sm2">
+				<div><a href="shopAll.jsp?product_kind=210#t_kind">역사</a></div>
+				<div><a href="shopAll.jsp?product_kind=210#t_kind">예술</a></div>
+				<div><a href="shopAll.jsp?product_kind=230#t_kind">종교</a></div>
+				<div><a href="shopAll.jsp?product_kind=240#t_kind">사회</a></div>
+				<div><a href="shopAll.jsp?product_kind=250#t_kind">과학</a></div>
+			</div>
 		</div>
-		<div class="m_menu3 main"><a href="#">경제/자기계발</a></div> <%-- 300번대 main --%>
-		<div class="s_menu3 sub">
-			<div>경제/경영</div>
-			<div>자기계발</div>
+		<div class="m_menu mm3">
+			<a href="#">경제/자기계발</a>
+			<div class="s_menu sm3">
+				<div><a href="shopAll.jsp?product_kind=310#t_kind">경제/경영</a></div>
+				<div><a href="shopAll.jsp?product_kind=320#t_kind">자기계발</a></div>
+			</div>
 		</div>
-		<div class="m_menu4 main"><a href="#">여행/잡지</a></div>	  <%-- 400,500번대 main --%>
-		<div class="s_menu4 sub">
-			<div>여행</div>
-			<div>만화</div>
-			<div>잡지</div>
+		<div class="m_menu mm4">
+			<a href="#">여행/잡지</a>
+			<div class="s_menu sm4">
+				<div><a href="shopAll.jsp?product_kind=410#t_kind">여행</a></div>
+				<div><a href="shopAll.jsp?product_kind=510#t_kind">잡지</a></div>
+			</div>
 		</div>
-		<div class="m_menu5 main"><a href="#">가정/건강</a></div>	  <%-- 600,700번대 main --%>
-		<div class="s_menu5 sub">
-			<div>어린이</div>
-			<div>육아</div>
-			<div>가정/살림</div>
-			<div>요리</div>
+		<div class="m_menu mm5">
+			<a href="#">가정/건강</a>
+			<div class="s_menu sm5">
+				<div><a href="shopAll.jsp?product_kind=610#t_kind">어린이</a></div>
+				<div><a href="shopAll.jsp?product_kind=620#t_kind">육아</a></div>
+				<div><a href="shopAll.jsp?product_kind=630#t_kind">가정/살림</a></div>
+				<div><a href="shopAll.jsp?product_kind=710#t_kind">건강/취미</a></div>
+				<div><a href="shopAll.jsp?product_kind=720#t_kind">요리</a></div>
+			</div>
 		</div>
-		<div class="m_menu6 main"><a href="#">IT/수험서</a></div>	  <%-- 800,900번대 main --%>
-		<div class="s_menu6 sub">
-			<div>IT 모바일</div>
-			<div>수험서/자격증</div>
-			<div>참고서</div>
+		<div class="m_menu mm6">
+			<a href="#">IT/수험서</a>
+			<div class="s_menu sm6">
+				<div><a href="shopAll.jsp?product_kind=810#t_kind">IT모바일</a></div>
+				<div><a href="shopAll.jsp?product_kind=910#t_kind">수험서/자격증</a></div>
+				<div><a href="shopAll.jsp?product_kind=920#t_kind">참고서</a></div>
+			</div>
 		</div>
 	</div>
+	
 	<div class="t_box4"> <%-- 구역4(하단 우측): 로그인, 회원가입 --%>
-		<a href="#"><span>로그인</span></a>
-		<a href="#"><span>회원가입</span></a>
-		<a href="#"><span>고객센터</span></a>
+		<a href="#"><span>로그인</span></a>&ensp;|&ensp;
+		<a href="#"><span>회원가입</span></a>&ensp;|&ensp;
+		<a href="#"><span>고객센터</span></a>&ensp;
 	</div>
+	<div class="top_end"></div>
 </div>

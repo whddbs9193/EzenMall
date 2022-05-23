@@ -101,7 +101,7 @@ int cnt = productDAO.getProductCount(product_kind);
 %>
 <%-- 분류별 상품을 4개씩 3단으로 처리 --%>
 <hr>
-<div class="t_kind">
+<div class="t_kind" id="t_kind">
 	<div class="d_kind1">
 		<span class="s_kind1"><b class="s_kind11"><%=product_kindName %></b>분야 상품 목록</span>
 		<span class="s_kind2">
