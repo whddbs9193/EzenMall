@@ -34,6 +34,7 @@ border-radius: 50%; margin: 140px 5px 0px 5px; text-align: center; line-height: 
 #pBox:hover{background: #f1617d; color: white; font-weight: bold; border-radius: 50%;}
 .pBox_c{ background: #f1617a; color: white; font-weight: 900; border-radius: 50%;}
 .pBox_b{ font-weight: bold;}
+.main_end{margin: 60px 0 20px;}
 </style>
 <script>
 document.addEventListener("DOMContentLoaded",function(){
@@ -198,3 +199,4 @@ int cnt = productDAO.getProductCount(product_kind);
 	}
 	%>
 </div>
+<hr class="main_end">

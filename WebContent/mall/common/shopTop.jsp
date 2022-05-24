@@ -8,8 +8,8 @@
 /* 전체 레이아웃 */
 .top a{text-decoration: none; color: ; color:#7bb0db;}
 .t_box1, .t_box2, .t_box3, .t_box4{display:inline-block; padding: 2%;}
-.t_box1, .t_box3{width: 65%;}
-.t_box2, .t_box4{width: 25%;}
+.t_box1, .t_box3{width: 63%;}
+.t_box2, .t_box4{width: 27%;}
 /* 구역1(상단 좌측) 타이틀, 검색 */
 .t_box1 .m_title{font-family: 'Permanent Marker', cursive; font-size: 2.8em; text-align: center;}
 .t_box1 .s_title{font-family: 'Nanum Pen Script', cursive; font-size: 1.4em; text-align: center;}
@@ -23,7 +23,6 @@ border: 1px solid #000; border-radius: 35px; padding: 5px;}
 .t_box2 .t_b2_img1:hover{content: url('../../icons/user2.png');}
 .t_box2 .t_b2_img2:hover{content: url('../../icons/buy2.png');}
 .t_box2 .t_b2_img3:hover{content: url('../../icons/cart2.png');}
-
 /* 구역3(하단 좌측) 메인메뉴(하위메뉴) */
 .t_box3{float: left; position: relative;}
 .m_menu0{display: inline-block; width: 30px;}
@@ -31,7 +30,6 @@ border: 1px solid #000; border-radius: 35px; padding: 5px;}
 .m_menu{display: inline-block;}
 .m_menu a{font-family: 'Dongle', sans-serif; font-size: 1.9em; color: #a6615a; width:100px; padding: 5px; margin:5px; font-weight: bold;}
 .s_menu{display:none; position:absolute; top:55px; width:119px; z-index: 10; background: #e9e1f4;}
-
 .m_menu a:hover{color: purple; text-shadow: 1px 1px 1px lightgray;}
 .m_menu:hover .s_menu{display: block;}
 .s_menu div {padding: 10px 0;}
@@ -39,13 +37,12 @@ border: 1px solid #000; border-radius: 35px; padding: 5px;}
 .s_menu div a:hover{font-weight: bold; font-size: 1.0em; text-shadow: 1px 1px 1px gray;}
 /* 구역4(하단 우측) 로그인, 회원가입, 고객센터 */
 .t_box4{ float: right; text-align: right;}
-.t_box4 a{color: black;}
+.t_box4 a{color: gray; font-size: 0.9em; font-weight: bold;}
 .top_end{clear: both;}
-
 </style>
-<script>
-
-</script>
+<%
+String memberId = (String)session.getAttribute("memberId");
+%>
 <div class="top">
 	<div class="t_box1"> <%-- 구역1(상단 좌측): 타이틀, 검색--%>
 		<div class="m_title"><a href="../shopping/shopAll.jsp">EZENMALL</a></div>
@@ -58,9 +55,9 @@ border: 1px solid #000; border-radius: 35px; padding: 5px;}
 		</div>
 	</div>
 	<div class="t_box2"> <%-- 구역2(상단 우측): 회원정보, 구매정보, 장바구니정보 --%>
-		<a><img src="../../icons/user1.png" width="40" title="회원정보" class="t_b2_img1"></a>&emsp;&emsp;
-		<a><img src="../../icons/buy1.png" width="40" title="구매정보" class="t_b2_img2"></a>&emsp;&emsp;
-		<a><img src="../../icons/cart1.png" width="40" title="장바구니정보" class="t_b2_img3"></a>
+		<a href="../member/memberInfoForm.jsp"><img src="../../icons/user1.png" width="40" title="회원정보" class="t_b2_img1"></a>&emsp;&emsp;
+		<a href="#"><img src="../../icons/buy1.png" width="40" title="구매정보" class="t_b2_img2"></a>&emsp;&emsp;
+		<a href="#"><img src="../../icons/cart1.png" width="40" title="장바구니정보" class="t_b2_img3"></a>
 	</div>	
 	<div class="t_box3"> <%-- 구역3(하단 좌측): 메인메뉴(하위메뉴) --%>
 		<div class="m_menu0"><a href="#"><img src="../../icons/menu1.png" width="25" class="m_menu_img"></a></div>
@@ -114,11 +111,15 @@ border: 1px solid #000; border-radius: 35px; padding: 5px;}
 			</div>
 		</div>
 	</div>
-	
 	<div class="t_box4"> <%-- 구역4(하단 우측): 로그인, 회원가입 --%>
-		<a href="#"><span>로그인</span></a>&ensp;|&ensp;
-		<a href="#"><span>회원가입</span></a>&ensp;|&ensp;
+		<%if(memberId == null){ %>
+			<a href="../logon/memberLoginForm.jsp"><span>로그인</span></a>&ensp;|&ensp;
+			<a href="../member/memberJoinForm.jsp"><span>회원가입</span></a>&ensp;|&ensp;
+		<%}else{ %>
+			<a href="../member/memberInfoForm.jsp"><%=memberId %>님</a>&ensp;|&ensp;<a href="../logon/memberLogout.jsp">로그아웃</a>&ensp;|&ensp;
+		<%} %>		
 		<a href="#"><span>고객센터</span></a>&ensp;
 	</div>
 	<div class="top_end"></div>
 </div>
+<hr>

@@ -61,7 +61,6 @@
 /* 	for (ProductDTO product : newProductList) {
 		System.out.println(product.getProduct_id() + " , " + product.getProduct_image());
 	} */
-
 	%>
 	<%-- 쇼핑몰 전체: 상단+메인+하단 --%>
 	<div id="container">
