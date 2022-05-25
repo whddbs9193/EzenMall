@@ -14,15 +14,17 @@
 
 	MemberDAO memberDAO = MemberDAO.getInstance();
 	int cnt = memberDAO.deleteMember(id, pwd);
+	
+	out.print("<script>");
+	if(cnt > 0){
+		session.removeAttribute("memberId");
+		out.print("alert('회원 탈퇴에 성공하였습니다.');");
+		out.print("location='../shopping/shopAll.jsp';");
+	}else{
+		out.print("alert('회원 탈퇴에 실패하였습니다.')");
+		out.print("history.back()");
+	}
+	out.print("</script>");
 	%>
-	<script>
-	<%if (cnt > 0) {%> <%-- 삭제 완료 --%>
-		alert('회원 탈퇴 완료!');
-		location = '../logon/memberLoginForm.jsp';
-	<%} else {%>
-		alert('회원 탈퇴 실패');
-		history.back();
-	<%}%>
-	</script>
 </body>
 </html>

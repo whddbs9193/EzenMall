@@ -36,21 +36,12 @@ font-size: 1.1em; font-weight: bold; cursor: pointer; border-radius: 5px}
 <script>
 	document.addEventListener("DOMContentLoaded",function(){
 		let form = document.infoForm;
-		let id = form.id;
-		let pwd = form.pwd;
-		let pwd2 = form.pwd2;
-		let name = form.name;
-		let email = form.email;
-		let tel = form.tel;
-		let address = form.address;
-		let address2 = form.address2;		
-		
 		
 		// 비밀번호 - pwd
 		// 비밀번호 유효성 검사 - 8글자 이상이 비밀번호를 생성
 		let chk_pwd = document.getElementById("chk_pwd");
-		pwd.addEventListener("keyup", function(){
-			if(pwd.value.length < 4){
+		form.pwd.addEventListener("keyup", function(){
+			if(form.pwd.value.length < 4){
 				chk_pwd.innerText = "비밀번호는 8글자 이상이어야 합니다.";
 				chk_pwd.style.color = "red";
 			}else{
@@ -61,8 +52,8 @@ font-size: 1.1em; font-weight: bold; cursor: pointer; border-radius: 5px}
 		// 비밀번호 확인 - pwd2
 		// 비밀번호와 비밀번호 확인의 내용이 동일한지 유무를 판단
 		let chk_pwd2 = document.getElementById("chk_pwd2");
-		pwd2.addEventListener("keyup",function(){
-			if(pwd.value == pwd2.value){
+		form.pwd2.addEventListener("keyup",function(){
+			if(form.pwd.value == form.pwd2.value){
 				chk_pwd2.innerText = "비밀번호가 일치합니다.";
 				chk_pwd2.style.color = "blue";
 			}else{
@@ -78,7 +69,7 @@ font-size: 1.1em; font-weight: bold; cursor: pointer; border-radius: 5px}
 		// 1. '@' 문자를 포함하고 있는지의 여부 -> 아이디가 3글자 이상인지를 판별
 		// 2. '@' 문자 다음에 '.'을 포함하고 있는지의 여부 -> 회사이름도 3글자 이상인지를 판별
 		let chk_email = document.getElementById("chk_email");
-		email.addEventListener("keyup",function(event){
+		form.email.addEventListener("keyup",function(event){
 			let value = event.currentTarget.value;
 			if(isEmail(value)){ // 이메일 형식이 맞을 때
 				chk_email.innerHTML = "이메일 형식이 맞습니다. : " + value;
@@ -93,7 +84,7 @@ font-size: 1.1em; font-weight: bold; cursor: pointer; border-radius: 5px}
 		btn_address.addEventListener("click",function(){
 			new daum.Postcode({
 				oncomplete:function(data){
-					address.value = data.address;
+					form.address.value = data.address;
 				}
 			}).open();
 		})
@@ -101,44 +92,44 @@ font-size: 1.1em; font-weight: bold; cursor: pointer; border-radius: 5px}
 		// 회원 정보 수정 페이지의 전체 내용 입력 유무에 따른 유효성 검사와 페이지 이동 처리
 		let btn_update = document.getElementById("btn_update");
 		btn_update.addEventListener("click",function(){
-			if(pwd.value.length == 0){
+			if(form.pwd.value.length == 0){
 				alert('비밀번호를 입력하시오!');
-				pwd.focus();
+				form.pwd.focus();
 				return;
 			}
-			if(pwd2.value.length == 0){
+			if(form.pwd2.value.length == 0){
 				alert('비밀번호 확인을 입력하시오!');
-				pwd2.focus();
+				form.pwd2.focus();
 				return;
 			}
-			if(pwd.value != pwd2.value){
+			if(form.pwd.value != form.pwd2.value){
 				alert('비밀번호 확인은 비밀번호와 다릅니다!');
-				pwd2.focus();
+				form.pwd2.focus();
 				return;
 			}
-			if(name.value.length == 0){
+			if(form.name.value.length == 0){
 				alert('이름을 입력하시오!');
-				name.focus();
+				form.name.focus();
 				return;
 			}
-			if(email.value.length == 0){
+			if(form.email.value.length == 0){
 				alert('이메일을 입력하시오!');
-				email.focus();
+				form.email.focus();
 				return;
 			}
-			if(tel.value.length == 0){
+			if(form.tel.value.length == 0){
 				alert('전화번호를 입력하시오!');
-				tel.focus();
+				form.tel.focus();
 				return;
 			}
-			if(address.value.length == 0){
+			if(form.address.value.length == 0){
 				alert('주소찾기 버튼을 클릭하여 주소를 선택하시오!');
-				address.focus();
+				form.address.focus();
 				return;
 			}
-			if(address2.value.length == 0){
+			if(form.address2.value.length == 0){
 				alert('상세주소를 입력하시오!');
-				address2.focus();
+				form.address2.focus();
 				return;
 			}
 			form.submit();
@@ -147,7 +138,6 @@ font-size: 1.1em; font-weight: bold; cursor: pointer; border-radius: 5px}
 		// 회원탈퇴 버튼을 클릭할떄 회원탈퇴(삭제)
 		let btn_delete = document.getElementById("btn_delete");
 		btn_delete.addEventListener("click",function(){
-			let form = document.infoForm;
 			if(!form.id.value){
 				alert('아이디를 입력하시오');
 				form.id.focus();
@@ -164,7 +154,7 @@ font-size: 1.1em; font-weight: bold; cursor: pointer; border-radius: 5px}
 				form.pwd2.focus();
 				return;
 			}
-			if(pwd.value != pwd2.value){
+			if(form.pwd.value != form.pwd2.value){
 				alert('비밀번호를 올바르게 입력하시오!');
 				form.pwd2.focus();
 				return;
@@ -176,7 +166,6 @@ font-size: 1.1em; font-weight: bold; cursor: pointer; border-radius: 5px}
 			}else{
 				return;
 			}
-			
 		})
 	})
 </script>
@@ -184,7 +173,7 @@ font-size: 1.1em; font-weight: bold; cursor: pointer; border-radius: 5px}
 <body>
 <%
 String memberId = (String)session.getAttribute("memberId");
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 if(memberId == null){
 	out.print("<script>location='../logon/memberLoginForm.jsp'</script>");
