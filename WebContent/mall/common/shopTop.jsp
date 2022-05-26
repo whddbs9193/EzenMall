@@ -26,7 +26,7 @@ border: 1px solid #000; border-radius: 35px; padding: 5px;}
 /* 구역3(하단 좌측) 메인메뉴(하위메뉴) */
 .t_box3{float: left; position: relative;}
 .m_menu0{display: inline-block; width: 30px;}
-.m_menu0:hover{content: url('../../icons/menu2.png'); width:30px;}
+.m_menu0:hover{content: url('../../icons/menu2.png'); width: 26px; margit-left: 20px;}
 .m_menu{display: inline-block;}
 .m_menu a{font-family: 'Dongle', sans-serif; font-size: 1.9em; color: #a6615a; width:100px; padding: 5px; margin:5px; font-weight: bold;}
 .s_menu{display:none; position:absolute; top:55px; width:119px; z-index: 10; background: #e9e1f4;}
@@ -60,7 +60,7 @@ String memberId = (String)session.getAttribute("memberId");
 		<a href="#"><img src="../../icons/cart1.png" width="40" title="장바구니정보" class="t_b2_img3"></a>
 	</div>	
 	<div class="t_box3"> <%-- 구역3(하단 좌측): 메인메뉴(하위메뉴) --%>
-		<div class="m_menu0"><a href="#"><img src="../../icons/menu1.png" width="25" class="m_menu_img"></a></div>
+		<div class="m_menu0"><a href="#"><img src="../../icons/menu1.png" width="25px" class="m_menu_img"></a></div>
 		<div class="m_menu mm1">
 			<a href="#">소설/시</a>
 			<div class="s_menu sm1">

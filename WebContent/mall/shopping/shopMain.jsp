@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded",function(){
 	product_kind.addEventListener("change", function(event){
 		
 		// 상품 분류 선택 시에 select의 option을 변경
-		location = 'shopAll.jsp?product_kind=' + product_kind.value;
+		location = 'shopAll.jsp?product_kind=' + product_kind.value + '#t_kind';
 	})
 	
 })
