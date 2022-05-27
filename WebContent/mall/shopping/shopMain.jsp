@@ -33,7 +33,7 @@ border-radius: 50%; margin: 140px 5px 0px 5px; text-align: center; line-height: 
 #pBox{display: inline-block; width: 22px; height: 22px; padding: 5px; margin: 5px;}
 #pBox:hover{background: #f1617d; color: white; font-weight: bold; border-radius: 50%;}
 .pBox_c{ background: #f1617a; color: white; font-weight: 900; border-radius: 50%;}
-.pBox_b{ font-weight: bold;}
+.pBox_b{ font-weight: bold; color: pink;}
 .main_end{margin: 60px 0 20px;}
 </style>
 <script>
@@ -171,30 +171,30 @@ int cnt = productDAO.getProductCount(product_kind);
 		
 		// 맨 처음 페이지 이동 처리
 		if(startPage >  3){
-			out.print("<a href='shopAll.jsp?pageNum=1&product_kind="+product_kind+ "'><div id = 'pBox' class='pBox_b' title='첫 페이지'>"+ "〈〈" + "</div></a>");
+			out.print("<a href='shopAll.jsp?pageNum=1&product_kind="+product_kind+ "#t_kind'><div id = 'pBox' class='pBox_b' title='첫 페이지'>"+ "〈〈" + "</div></a>");
 		}
 		
 		// 이전 페이지 처리
 		if(startPage >  3){
-			out.print("<a href='shopAll.jsp?pageNum="+ (currentPage-3) + "&product_kind="+product_kind+ "'title='이전 3페이지'><div id = 'pBox' class='pBox_b'>"+ "〈 " + "</div></a>");
+			out.print("<a href='shopAll.jsp?pageNum="+ (currentPage-3) + "&product_kind="+product_kind+ "#t_kind'title='이전 3페이지'><div id = 'pBox' class='pBox_b'>"+ "〈 " + "</div></a>");
 		}
 		// 페이징 블럭 출력 처리
 		for(int i=startPage ; i <= endPage; i++){
 			if(currentPage == i){ // 선택된 페이지 현재 페이지일 때
 				out.print("<div id='pBox' class='pBox_c'>"+ i +"</div>");
 			}else{ // 다른 페이지일 때 -> 이동에 대한 링크 설정
-				out.print("<a href='shopAll.jsp?pageNum=" + i + "&product_kind="+product_kind+"'><div id='pBox'>"+ i +"</div></a>");
+				out.print("<a href='shopAll.jsp?pageNum=" + i + "&product_kind="+product_kind+"#t_kind'><div id='pBox'>"+ i +"</div></a>");
 			}
 		}
 		// 다음 페이지 처리
 		if(endPage < pageCount){
 			int movePage = currentPage + 3;
 			if(movePage > pageCount) movePage = pageCount;
-			out.print("<a href='shopAll.jsp?pageNum="+ movePage +"&product_kind="+product_kind+"'title='다음 3페이지'><div id = 'pBox' class='pBox_b'>"+ " 〉" + "</div></a>");
+			out.print("<a href='shopAll.jsp?pageNum="+ movePage +"&product_kind="+product_kind+"#t_kind'title='다음 3페이지'><div id = 'pBox' class='pBox_b'>"+ " 〉" + "</div></a>");
 		}
 		// 맨 끝 페이지 이동 처리
 		if(endPage < pageCount){
-			out.print("<a href='shopAll.jsp?pageNum="+ pageCount + "&product_kind="+product_kind+"'title='끝페이지'><div id = 'pBox' class='pBox_b' >"+ " 〉〉" + "</div></a>");
+			out.print("<a href='shopAll.jsp?pageNum="+ pageCount + "&product_kind="+product_kind+"#t_kind'title='끝페이지'><div id = 'pBox' class='pBox_b' >"+ " 〉〉" + "</div></a>");
 		}
 	}
 	%>
