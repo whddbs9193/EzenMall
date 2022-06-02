@@ -216,7 +216,7 @@ font-size: 1.1em; font-weight: bold; cursor: pointer; border-radius: 5px}
 		</div>
 	</form>
 	<hr class="t_line">
-	<jsp:include page="../common/shopBottom.jsp"></jsp:include>
+	<jsp:include page="../common/shopBottom.jsp" />
 </div>
 </body>
 </html>

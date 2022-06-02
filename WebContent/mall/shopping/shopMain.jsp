@@ -30,6 +30,7 @@
 border-radius: 50%; margin: 140px 5px 0px 5px; text-align: center; line-height: 70px; font-size: 0.9em; font-weight: bold; color:white;}
 /* 하단- 페이징 영역 */
 #paging{text-align: center; margin-top: 20px; clear: both;}
+#paging a{color:#7bb0db;}
 #pBox{display: inline-block; width: 22px; height: 22px; padding: 5px; margin: 5px;}
 #pBox:hover{background: #f1617d; color: white; font-weight: bold; border-radius: 50%;}
 .pBox_c{ background: #f1617a; color: white; font-weight: 900; border-radius: 50%;}

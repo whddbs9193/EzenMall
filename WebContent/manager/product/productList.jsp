@@ -94,6 +94,7 @@ if(search == null) {
 ProductDAO productDAO = ProductDAO.getInstance();
 // 전체 상품수 조회
 int cnt = 0;
+
 // 전체 상품 조회 - paging 처리, 검색 처리(search가 1이면 검색처리, search가 0이면 검색이 아님)
 List<ProductDTO> productList = null;
 if(search.equals("1")) {
