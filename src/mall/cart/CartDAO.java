@@ -62,6 +62,7 @@ public class CartDAO {
 				cart.setCart_id(rs.getInt("cart_id"));
 				cart.setBuyer(rs.getString("buyer"));
 				cart.setProduct_id(rs.getInt("product_id"));
+				cart.setProduct_price(rs.getInt("product_price"));
 				cart.setProduct_name(rs.getString("product_name"));
 				cart.setAuthor(rs.getString("author"));
 				cart.setPublishing_com(rs.getString("publishing_com"));
