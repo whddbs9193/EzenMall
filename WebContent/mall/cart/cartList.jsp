@@ -11,22 +11,31 @@
 <style>
 #container{width: 1200px; margin: 0 auto;}
 .cart_list{width: 100%}
-/* 상단 1 */
+/* 상단 d1 */
+.d1{width: 43%; padding:15px; margin: 15px 45px; float:left; display: inline-block;}
+.d1 .s1{font-size: 1.1em; font-weight: bold; margin-right: 30px;}
+.d1 .s2, .d1 .s3{display:inline-block; width:150px; text-align:center; padding: 6px 17px; border:1px solid gray; font-weight: bold; font-size: 0.8em; border-radius: 15px;}
+.d1 .s2{background: #333; color:#fff; z-index: 1; position: relative;}
+.d1 .s3{background: #fff; color:#333; margin-left: -30px; z-index:-1; position: relative;}
+/* 상단 d2 */
+.d2{width: 34%; padding:15px;margin: 5px 45px; float: right; display: inline-block; text-align: right;}
+.d_line{clear:both; width:90%; border: 1px solid lightgray;}
+/* 상단 d3 */
+.d3 {width: 90%; padding: 15px; margin: 5px 45px; float:left;}
+.d3 input[type=checkbox]{ zoom: 1.6; margin-right: 5px; float: left;}
+.d3 lable{font-size: 0.9em; margin-right: 20px;}
+.d3 input[type=button] {width: 80px; height: 30px; border: none; border-radius: 3px; color:#fff; font-weight: bold; cursor: pointer;}
+.d3 #btn_buy_select{ background: #32708d; border: 1px solid #32708d; margin-right: 5px;}
+.d3 #btn_delete_select { background: #99424f; border: 1px solid #99424f; }
 
-/* 상단 2 */
-
-/* 상단 3 */
-.d3{width: 90%; padding:15px; margin: 15px 45px;}
-.d3 .s1{font-size: 1.1em; font-weight: bold; margin-right: 30px;}
-.d3 .s2, .d3 .s3{display:inline-block; width:150px; text-align:center; padding: 6px 17px; border:1px solid gray; font-weight: bold; font-size: 0.8em; border-radius: 15px; }
-.d3 .s2{background: #333; color:#fff; z-index: 1; position: relative;}
-.d3 .s3{background: #fff; color:#333; margin-left: -30px; z-index:-1; position: relative;}
-/* 상품 정보 테이블 */
-.t_cart_list{width: 90%; border:1px solid gray; border-collapse: collapse; margin: 0 auto; font-size: 0.9em; border-left: none; border-right: none;}
+/* 중단 - 상품 정보 테이블 */
+.t_cart_list{width: 90%; border:1px solid gray; border-collapse: collapse; margin: 0 auto; font-size: 0.9em; 
+border-left: none; border-right: none; clear: both;}
 .t_cart_list tr{height: 40px;}
 .t_cart_list td, .t_cart_list th{border-top: 1px solid #f1f3f5; border-bottom: 1px solid #f1f3f5; border-left: none; border-right: none;}
-.t_cart_list th{background: #f1f3f5}
+.t_cart_list th{background: #f1f3f5;}
 .t_cart_list td{}
+.t_cart_list tr:last-child th{font-weight: normal;}
 .left{text-align: left; padding-left: 10px;}
 .right{text-align: right; padding-right: 10px;}
 .center{text-align: center;}
@@ -41,9 +50,50 @@
 .td4 input[type=number]::-webkit-inner-spin-button, 
 .td4 input[type=number]::-webkit-outer-spin-button {-webkit-appearance: "Always Show Up/Down Arrows"; opacity: 1;}
 .td4 input[type="button"] {width: 53px; height: 25px; border:1px solid gray; background:  #fff; border-radius: 2px; font-size: 0.8em; cursor: pointer;}
-.td7 input[type="button"] {width: 80px; height: 30px; border: none; border-radius: 3px; color:#fff; font-weight: bold}
-.td7 #btn_buy_one{background: #1e94be; margin-bottom: 5px;}
-.td7 #btn_delete_one{background: #c84557; border: 1px solid #c84557;}
+.td7 input[type="button"] {width: 80px; height: 30px; border: none; border-radius: 3px; color:#fff; font-weight: bold; cursor: pointer;}
+.td7 .btn_buy_one{background: #1e94be; margin-bottom: 5px;}
+.td7 .btn_delete_one{background: #c84557; border: 1px solid #c84557;}
+
+/* 하단 d4  */
+.d4 {width: 90%; padding: 15px; margin: 0 45px;}
+.d4 span{font-size: 0.9em; font-weight: bold; color: gray; margin-right: 10px;}
+.d4 input[type=button] {width: 80px; height: 30px; border: none; border-radius: 3px; color:#fff; font-weight: bold; cursor: pointer;}
+.d4 #btn_buy_select2{ background: #32708d; border: 1px solid #32708d; margin-right: 5px;}
+.d4 #btn_delete_select2{ background: #99424f; border: 1px solid #99424f; }
+
+/* 하단 - 총상품금액 테이블 */
+.t_cart_tot{width: 90%; border:1px solid gray; border-collapse: collapse; margin: 0 auto; font-size: 0.9em; 
+border: 1px solid #196ab3; clear: both; background: #e6f0fa;}
+.t_cart_tot tr{height: 100px;}
+.t_cart_tot td, .t_cart_tot th{}
+.t_cart_tot tr:first-child th:last-of-type { background: #d4e3f1;}
+.t_cart_tot span{font-size: 1.5em; display: inline-block; margin-top: 5px;}
+.t_cart_tot tr:first-child th:nth-of-type(5){ color: #196ab3;}
+.t_cart_tot tr:first-child th:nth-of-type(7){ color: #a13b66;}
+
+.t_cart_tot tr:nth-child(2) {font-size: 0.6em; }
+.t_cart_tot tr:nth-child(2) span{font-weight: nomal;}
+.t_cart_tot tr:nth-child(2) span b{color: #a13b66;}
+.t_cart_tot tr:nth-child(2) th{border-top: 1px solid #196ab3;}
+
+/* 하단 - 배송지 테이블 */
+.t_cart_address{width: 90%; border:1px solid gray; border-collapse: collapse; margin: 0 auto; font-size: 0.9em; clear: both;
+margin: 20px auto;}
+.t_cart_address tr{height: 80px;}
+.t_cart_address td, .t_cart_address th{border: 1px solid #dee2e6;}
+.t_cart_address th{background: #f1f3f5;}
+.t_cart_address td input{margin-top: 10px;}
+.t_cart_address td{padding-left: 10px;}
+.t_cart_address th input{ margin-top: 20px;}
+.t_cart_address input[type=button]{width: 80px; height: 30px; background: #fff; border:1px solid lightgray; border-radius: 3px;
+padding: 5px; font-size:0.9em;}
+
+/* 하단 - 주문 */
+.d5{width: 90%; padding: 15px; margin: 0 45px 30px; text-align: center;}
+.d5 input[type=button]{width: 150px; height: 50px; font-size: 1.05em; font-weight: bold; color: #fff; cursor:pointer; border-radius: 5px;}
+.d5 #btn_buy_select3{background: #3a85c8; border: 1px solid #3a85c8;}
+.d5 #btn_shop{background: #2f9e77; border: 1px solid #2f9e77;}
+.d_line2{clear:both; width:100%; border: 1px solid lightgray; margin-bottom: 20px;}
 </style>
 <script>
 	document.addEventListener("DOMContentLoaded",function(){
@@ -127,7 +177,18 @@ int product_price = 0;
 int discount_rate = 0;
 int buy_price = 0;
 int buy_count = 0;
-int p_sum = 0;
+int p_sum = 0; // 각 상품의 합계
+int p_tot = 0; // 주문 상품의 총합계
+
+int p_sum2 = 0; // 각 상품의 합계(원가)
+int p_tot2 = 0; // 주문 상품의 총합계(원가)
+
+int d_count = 0; // 실제 할인된 금액
+int p_sum3 = 0; // 각 상품의 실제 할인된 금액의 합계
+int p_tot3 = 0; // 주문 상품의 실제 할인된 금액의 총합계
+
+int k_count = 0; // 주문 상품의 종류
+int p_count = 0; // 주문 상품의 총개수
 // 장바구니 확인
 /*
 for(CartDTO cart : cartList){
@@ -139,17 +200,19 @@ for(CartDTO cart : cartList){
 	<jsp:include page="../common/shopTop.jsp" />
 	<div class="cart_list">
 		<div class="d1">
-		
-		</div>
-		<div class="d2">
-			<input type="checkbox" name="ck_cart_all" id="ck_cart_all"><lable for="ck_cart_all">전체 선택</lable>
-			<input type="button" value="주문" id="btn_buy_select">
-			<input type="button" value="삭제" id="btn_delete_select">
-		</div>
-		<div class="d3">
 			<span class="s1">EZENMALL 배송</span>
 			<span class="s2">당일/하루/일반 배송</span>
 			<span class="s3">아침배송</span>
+		</div>
+		<div class="d2">
+			<img src="../../icons/progress01.PNG" width="300" height="45">
+		</div>
+		<hr class="d_line">
+		
+		<div class="d3">
+			<input type="checkbox" name="ck_cart_all" id="ck_cart_all"><lable for="ck_cart_all">전체 선택</lable>
+			<input type="button" value="주문" id="btn_buy_select">
+			<input type="button" value="삭제" id="btn_delete_select">
 		</div>
 		<table class="t_cart_list">
 			<tr>
@@ -164,7 +227,17 @@ for(CartDTO cart : cartList){
 				discount_rate = cart.getDiscount_rate();
 				buy_price = cart.getBuy_price();
 				buy_count = cart.getBuy_count();
-				p_sum = buy_price * buy_count; // 각 상품의 합계
+				p_sum = buy_price * buy_count; // 각 상품의 합계(할인가격 * 주문수량)
+				p_tot += p_sum;               // 총합계(할인가격의 총합계)
+				
+				p_sum2 = product_price * buy_count; // 각 상품의 합계 (원가)
+				p_tot2 += p_sum2; // 총합계(원가)
+				
+				p_sum3 = product_price * discount_rate / 100 * buy_count; //각 상품의 할인된 가격, 10000 * 10 / 100
+				p_tot3 += p_sum3;        // 각 상품의 할인된 가격의 총합계
+				
+				++k_count;  //주문 상품 종류
+				p_count += buy_count; // 주문 상품 총개수
 			%>
 			<tr>
 				<td class="center td1" width="3%"><input type="checkbox" name="ck_cart_one" id="ck_cart_one"></td>
@@ -181,12 +254,47 @@ for(CartDTO cart : cartList){
 				<td class="right td5" width="8%"><%=df.format(p_sum) %>원</td>
 				<td class="center td6" width="11%"><%=d_day %><br>도착예정</td>
 				<td class="center td7" width="12%">
-					<input type="button" name="btn_buy_one" value="주문" id="btn_buy_one"><br>
-					<input type="button" name="btn_delete_one" value="삭제" id="btn_delete_one">
+					<input type="button" name="btn_buy_one" value="주문" class="btn_buy_one"><br>
+					<input type="button" name="btn_delete_one" value="삭제" class="btn_delete_one">
 			</tr>
 			<%} %>
+			<tr>
+				<th colspan="7">EZENMALL 배송 상품 총 금액 : <b><%=df.format(p_tot) %></b> 원(+배송비 0원)</th>
+			</tr>
 		</table>
-
+		<div class="d4">
+			<span>선택한 상품</span>
+			<input type="button" value="주문" id="btn_buy_select2">
+			<input type="button" value="삭제" id="btn_delete_select2">
+		</div>
+		<table class="t_cart_tot">
+			<tr>
+				<th>총 상품금액<br><span class="s1"><%=df.format(p_tot) %></span>원</th>
+				<th><img src="../../icons/plus.PNG" width="40"></th>
+				<th>총 추가금액<br><span class="s2"><%=0 %></span>원</th>
+				<th><img src="../../icons/minus.PNG" width="40"></th>
+				<th>총 할인금액<br><span class="s3"><%=0 %></span>원</th>
+				<th><img src="../../icons/equal.PNG" width="40"></th>
+				<th>최종 결제금액<br><span class="s4"><%=df.format(p_tot) %></span>원</th>
+			</tr>
+			<tr>
+				<th colspan="7">
+					<span>정가 <b><%=df.format(p_tot2) %> 원</b> 에서<b> <%=df.format(p_tot3) %> 원</b> 할인</span><br>
+					<span>총 주문수량: <%=k_count %>종 (<%=p_count %>개)</span>
+				</th>
+			</tr>
+		</table>
+		<table class="t_cart_address">
+			<tr>
+				<th>배송일 안내<br><input type="button" value="배송안내"></th>
+				<td>배송지 : <%=address %><input type="button" value="배송지 변경">
+			</tr>
+		</table>
+		<div class="d5">
+			<input type="button" value="주문하기" id="btn_buy_select3">&ensp;&ensp;
+			<input type="button" value="쇼핑계속하기" id="btn_shop">
+		</div>
+		<hr class="d_line2">
 	</div>
 	<jsp:include page="../common/shopBottom.jsp" />
 </div>
