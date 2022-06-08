@@ -82,14 +82,64 @@ public class CartDAO {
 		return cartList;
 	}
 	
-	// 장바구니 주문 수량 수정 (각 상품별로)
+	// 장바구니 상품 종류 개수
+	public int getCartListCount(String buyer) {
+		String sql = "select count(*) from cart where buyer = ?";
+		int count = 0;
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, buyer);
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			count = rs.getInt(1);
+		}catch (Exception e) {
+			System.out.println("=> getCartListCount() 메소드 실행 에러");
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return count;
+	}
 	
+	
+	// 장바구니 수량 변경 (각 상품별로)
+	public void updateCart(int cart_id, int buy_count) {
+		String sql = "update cart set buy_count = ? where cart_id = ?";
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, buy_count);
+			pstmt.setInt(2, cart_id);
+			pstmt.executeUpdate();
+		}catch (Exception e) {
+			System.out.println("=> updateCart() 메소드 실행 에러");
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(conn, pstmt);
+		}
+	}
 	
 	// 장바구니 삭제 (각 상품별로)
+	public void deleteCart(int cart_id) {
+		String sql = "delete from cart where cart_id = ?";
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,cart_id);
+			pstmt.executeUpdate();
+		}catch (Exception e) {
+			System.out.println("=> deleteCart() 메소드 실행 에러");
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(conn, pstmt);
+		}
+	}
 	
-	// 장바구니 삭제 (선택한 상품 또는 전체 상품 
-	
-	// 장바구니 상품 종류 개수
+	// 장바구니 삭제(선택한 상품 또는 전체 상품 )
 	
 	
 	

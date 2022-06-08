@@ -39,7 +39,8 @@ border-left: none; border-right: none; clear: both;}
 .left{text-align: left; padding-left: 10px;}
 .right{text-align: right; padding-right: 10px;}
 .center{text-align: center;}
-.td1 #ck_cart_one{zoom: 1.5;}
+.td0{text-align: center; font-weight: bold; font-size:1.1em; padding: 30px 0;}
+.td1 .ck_cart_one{zoom: 1.5;}
 .td3 .s1{ font-weight: bold; color: #1e94be;}
 .td3 .s2{font-size:0.9em; color: gray;}
 .td3 .s3{font-size:0.9em; color: gray; text-decoration: line-through;}
@@ -49,7 +50,7 @@ border-left: none; border-right: none; clear: both;}
 /* number 화살표 항상 보이는 효과 */
 .td4 input[type=number]::-webkit-inner-spin-button, 
 .td4 input[type=number]::-webkit-outer-spin-button {-webkit-appearance: "Always Show Up/Down Arrows"; opacity: 1;}
-.td4 input[type="button"] {width: 53px; height: 25px; border:1px solid gray; background:  #fff; border-radius: 2px; font-size: 0.8em; cursor: pointer;}
+.td4 input[type="submit"] {width: 53px; height: 25px; border:1px solid gray; background:  #fff; border-radius: 2px; font-size: 0.8em; cursor: pointer;}
 .td7 input[type="button"] {width: 80px; height: 30px; border: none; border-radius: 3px; color:#fff; font-weight: bold; cursor: pointer;}
 .td7 .btn_buy_one{background: #1e94be; margin-bottom: 5px;}
 .td7 .btn_delete_one{background: #c84557; border: 1px solid #c84557;}
@@ -97,15 +98,72 @@ padding: 5px; font-size:0.9em;}
 </style>
 <script>
 	document.addEventListener("DOMContentLoaded",function(){
-		// 구매 수량 제한 효과(1~100) -> 수정, 1번만 적용됨
-		let buy_count = document.getElementById("buy_count");
-		buy_count.addEventListener("keyup", function(){
-			if(buy_count.value < 1 ){
-				buy_count.value = 1;
-			}else if(buy_count.value > 100){
-				buy_count.value = 100;
+		// 구매 수량 제한 효과(1~100)
+		let buy_counts = document.querySelectorAll(".buy_count");
+		for(let buy_count of buy_counts){
+			buy_count.addEventListener("keyup", function(){
+				if(buy_count.value < 1 ){
+					buy_count.value = 1;
+				}else if(buy_count.value > 100){
+					buy_count.value = 100;
+				}
+			})
+		}
+		
+		// 각 상품별 삭제 버튼 처리(1개 상품)
+		let cart_ids = document.getElementsByName("cart_id");
+		let btn_delete_ones = document.querySelectorAll(".btn_delete_one");
+		for(let i=0; i<btn_delete_ones.length; i++){
+			btn_delete_ones[i].addEventListener("click",function(){
+				location = 'cartDeletePro.jsp?cart_id=' + cart_ids[i].value;
+			})
+		}
+		
+		// 각 상품별 주문 버튼 처리(1개)
+		let btn_buy_ones = document.querySelectorAll(".btn_buy_one");
+		for(let i = 0; i < btn_buy_ones.length; i++){
+			btn_buy_ones[i].addEventListener("click",function(){
+				location = '../buy/buyForm.jsp?cart_id=' + cart_ids[i].value;
+			})
+		}
+		
+		////////////////////////////////
+		// 전체 선택 체크박스
+		let ck_count = 0;
+		let ck_cart_ones = document.querySelectorAll(".ck_cart_one");
+		let ck_cart_all = document.getElementById("ck_cart_all");
+		
+		ck_cart_all.addEventListener("change",function(){
+			if(ck_cart_all.checked == true){ // 전체 선택을 체크하였을 때 -> 하위의 모든 체크박스를 선택
+				ck_count = ck_cart_ones.length;
+				for(let i = 0; i < ck_cart_ones.length; i++){
+					ck_cart_ones[i].checked = true;
+				}
+			
+			}else{ // 전체 선택을 해제해였을 때 -> 하위의 모든 체크박스를 해제
+				ck_count = 0;
+				for(let i=0; i<ck_cart_ones.length; i++){
+					ck_cart_ones[i].checked = false;
+				}
 			}
 		})
+		
+		// 각 상품별 체크박스 중에서 해제된 것이 있다면 전체 선택 체크박스를 헤제
+		// 각 상품별 체크박스가 모두 체크되었다면 전체 선택 체크박스를 선택
+		for(let i = 0; i<ck_cart_ones.length; i++){
+			ck_cart_ones[i].addEventListener("change",function(){
+				if(ck_cart_ones[i].checked == false ){
+					ck_cart_all.checked = false;
+					--ck_count;
+				}else if(ck_cart_ones[i].checked == true ){
+					++ck_count;
+				}
+				
+				if(ck_count == ck_cart_ones.length){
+					ck_cart_all.checked = true;
+				}
+			})
+		}
 	})
 </script>
 </head>
@@ -126,8 +184,7 @@ MemberDTO member = memberDAO.getMember(memberId);
 
 String address = member.getAddress();
 
-CartDAO cartDAO = CartDAO.getInstance();
-List<CartDTO> cartList = cartDAO.getCartList(memberId);
+
 
 String local = address.substring(0,2); // 주소에서 2글자만 추출
 
@@ -171,6 +228,11 @@ String[] weekday = {"index0","일","월","화","수","목","금","토"};
 // 배송일 확인
 String d_day = month + "월" + date + "일(" + weekday[week] +")요일 ";
 // System.out.println("배송일: " + month + "월" + date + "일(" + weekday[week] + "요일)");
+
+// 장바구니 DB 연결 질의
+CartDAO cartDAO = CartDAO.getInstance();
+List<CartDTO> cartList = cartDAO.getCartList(memberId);
+int cartListCount = cartDAO.getCartListCount(memberId);
 
 // 상품 가격(정가), 할인율, 할인가격(판매가)
 int product_price = 0;
@@ -222,6 +284,9 @@ for(CartDTO cart : cartList){
 				<th>배송정보</th>
 				<th>주문</th>
 			</tr>
+			<%if(cartListCount == 0){ %>
+			<tr><td colspan="7" class="td0">장바구니에 상품이 없습니다.</td></tr>
+			<%} else {%>
 			<%for(CartDTO cart : cartList) {
 				product_price = cart.getProduct_price();
 				discount_rate = cart.getDiscount_rate();
@@ -239,25 +304,29 @@ for(CartDTO cart : cartList){
 				++k_count;  //주문 상품 종류
 				p_count += buy_count; // 주문 상품 총개수
 			%>
+			<form action="cartUpdatePro.jsp" method="post" name="cartForm">
+			<input type="hidden" name="cart_id" value="<%= cart.getCart_id()%>">
+			<input type="hidden" name="product_id" value="<%=cart.getBuy_count() %>">
 			<tr>
-				<td class="center td1" width="3%"><input type="checkbox" name="ck_cart_one" id="ck_cart_one"></td>
+				<td class="center td1" width="3%"><input type="checkbox" name="ck_cart_one" class="ck_cart_one"></td>
 				<td class="center td2" width="8%"><img src="/images_ezenmall/<%=cart.getProduct_image()%>" width="60" height="90"></td>
-				<td class="left td3" width="50%">
+				<td class="left td3" width="48%">
 					<span class="s1"><%=cart.getProduct_name() %></span><br>
 					<span class="s2"><%=cart.getAuthor() %> | <%=cart.getPublishing_com() %></span><br>
 					<span class="s3"><%=df.format(product_price) %>원</span> | <span class="s4"><%=df.format(buy_price) %>원</span> (<span class="s5"><%=discount_rate %>%할인</span>)
 				</td>
 				<td class="center td4" width="8%">
-					<input type="number" name="buy_count" value="<%=buy_count%>" id="buy_count"><br>
-					<input type="button" name="buy_count" value="변경" id="btn_update">
+					<input type="number" name="buy_count" value="<%=buy_count%>" class="buy_count" min="1" max="100"><br>
+					<input type="submit" name="btn_count" value="변경">
 				</td>
-				<td class="right td5" width="8%"><%=df.format(p_sum) %>원</td>
-				<td class="center td6" width="11%"><%=d_day %><br>도착예정</td>
+				<td class="right td5" width="9%"><%=df.format(p_sum) %>원</td>
+				<td class="center td6" width="12%"><%=d_day %><br>도착예정</td>
 				<td class="center td7" width="12%">
 					<input type="button" name="btn_buy_one" value="주문" class="btn_buy_one"><br>
 					<input type="button" name="btn_delete_one" value="삭제" class="btn_delete_one">
 			</tr>
-			<%} %>
+			</form>
+			<%} }%>
 			<tr>
 				<th colspan="7">EZENMALL 배송 상품 총 금액 : <b><%=df.format(p_tot) %></b> 원(+배송비 0원)</th>
 			</tr>
