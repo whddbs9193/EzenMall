@@ -57,7 +57,7 @@ border-left: none; border-right: none; clear: both;}
 
 /* 하단 d4  */
 .d4 {width: 90%; padding: 15px; margin: 0 45px;}
-.d4 span{font-size: 0.9em; font-weight: bold; color: gray; margin-right: 10px;}
+.d4 span{font-size: 0.9em; font-weight: bold; color: gray; margin-right: 10px; margin-left: 30px;}
 .d4 input[type=button] {width: 80px; height: 30px; border: none; border-radius: 3px; color:#fff; font-weight: bold; cursor: pointer;}
 .d4 #btn_buy_select2{ background: #32708d; border: 1px solid #32708d; margin-right: 5px;}
 .d4 #btn_delete_select2{ background: #99424f; border: 1px solid #99424f; }
@@ -93,11 +93,23 @@ padding: 5px; font-size:0.9em;}
 .d5{width: 90%; padding: 15px; margin: 0 45px 30px; text-align: center;}
 .d5 input[type=button]{width: 150px; height: 50px; font-size: 1.05em; font-weight: bold; color: #fff; cursor:pointer; border-radius: 5px;}
 .d5 #btn_buy_select3{background: #3a85c8; border: 1px solid #3a85c8;}
-.d5 #btn_shop{background: #2f9e77; border: 1px solid #2f9e77;}
+.d5 #btn_shopping{background: #2f9e77; border: 1px solid #2f9e77;}
 .d_line2{clear:both; width:100%; border: 1px solid lightgray; margin-bottom: 20px;}
 </style>
 <script>
 	document.addEventListener("DOMContentLoaded",function(){
+		let form = document.cartForm;
+		let cart_ids = document.getElementsByName("cart_id");
+		
+		// 주문, 삭제 버튼
+		let btn_buy_select = document.getElementById("btn_buy_select");
+		let btn_buy_select2 = document.getElementById("btn_buy_select2");
+		let btn_buy_select3 = document.getElementById("btn_buy_select3");
+		let btn_delete_select = document.getElementById("btn_delete_select");
+		let btn_delete_select2 = document.getElementById("btn_delete_select2");
+		let btn_shopping = document.getElementById("btn_shopping");
+		
+		
 		// 구매 수량 제한 효과(1~100)
 		let buy_counts = document.querySelectorAll(".buy_count");
 		for(let buy_count of buy_counts){
@@ -111,7 +123,7 @@ padding: 5px; font-size:0.9em;}
 		}
 		
 		// 각 상품별 삭제 버튼 처리(1개 상품)
-		let cart_ids = document.getElementsByName("cart_id");
+		
 		let btn_delete_ones = document.querySelectorAll(".btn_delete_one");
 		for(let i=0; i<btn_delete_ones.length; i++){
 			btn_delete_ones[i].addEventListener("click",function(){
@@ -128,8 +140,9 @@ padding: 5px; font-size:0.9em;}
 		}
 		
 		////////////////////////////////
-		// 전체 선택 체크박스
-		let ck_count = 0;
+		// 전체 선택 체크박스 처리
+		let cart_ids_list = []; // 카트 아이디를 저장하는 배열
+		let ck_count = 0; // 각 상품별 체크박스의 체크 개수
 		let ck_cart_ones = document.querySelectorAll(".ck_cart_one");
 		let ck_cart_all = document.getElementById("ck_cart_all");
 		
@@ -138,16 +151,20 @@ padding: 5px; font-size:0.9em;}
 				ck_count = ck_cart_ones.length;
 				for(let i = 0; i < ck_cart_ones.length; i++){
 					ck_cart_ones[i].checked = true;
+					cart_ids_list.push(cart_ids[i].value);
 				}
-			
 			}else{ // 전체 선택을 해제해였을 때 -> 하위의 모든 체크박스를 해제
 				ck_count = 0;
+				cart_ids_list = [];
 				for(let i=0; i<ck_cart_ones.length; i++){
 					ck_cart_ones[i].checked = false;
+					
 				}
 			}
+			cart_ids_list = [...new Set(cart_ids_list)]; // 중복 카트 아이디를 제거
+			console.log(cart_ids_list);
 		})
-		
+		// 각 상품별 체크박스 처리
 		// 각 상품별 체크박스 중에서 해제된 것이 있다면 전체 선택 체크박스를 헤제
 		// 각 상품별 체크박스가 모두 체크되었다면 전체 선택 체크박스를 선택
 		for(let i = 0; i<ck_cart_ones.length; i++){
@@ -155,15 +172,63 @@ padding: 5px; font-size:0.9em;}
 				if(ck_cart_ones[i].checked == false ){
 					ck_cart_all.checked = false;
 					--ck_count;
-				}else if(ck_cart_ones[i].checked == true ){
+					cart_ids_list = cart_ids_list.filter((e) => e !== cart_ids[i].value);
+					
+				}else{
 					++ck_count;
+					cart_ids_list.push(cart_ids[i].value);
 				}
-				
 				if(ck_count == ck_cart_ones.length){
 					ck_cart_all.checked = true;
 				}
+				console.log(cart_ids_list);
 			})
 		}
+		
+		// 삭제 버튼 처리
+		btn_delete_select.addEventListener("click", function(){
+			if(ck_count==0){
+				alert('장바구니에 상품이 없습니다.');
+				return;
+			}
+			location = 'cartDeletePro2.jsp?cart_ids_list=' + cart_ids_list;
+		})
+		
+		btn_delete_select2.addEventListener("click",function(){
+			if(ck_count==0){
+				alert('장바구니에 상품이 없습니다.');
+				return;
+			}
+			location = 'cartDeletePro2.jsp?cart_ids_list=' + cart_ids_list;
+		})
+		
+		// 주문 버튼 처리
+		btn_buy_select.addEventListener("click",function(){
+			if(ck_count==0){
+				alert('장바구니에 상품이 없습니다.');
+				return;
+			}
+			location = '../buy/buyForm.jsp?cart_ids_list=' + cart_ids_list;
+		})
+		btn_buy_select2.addEventListener("click",function(){
+			if(ck_count==0){
+				alert('장바구니에 상품이 없습니다.');
+				return;
+			}
+			location = '../buy/buyForm.jsp?cart_ids_list=' + cart_ids_list;
+		})
+		btn_buy_select3.addEventListener("click",function(){
+			if(ck_count==0){
+				alert('장바구니에 상품이 없습니다.');
+				return;
+			}
+			location = '../buy/buyForm.jsp?cart_ids_list=' + cart_ids_list;
+		})
+		
+		// 쇼핑계속하기 버튼 처리
+		btn_shopping.addEventListener("click",function(){
+			location = '../shopping/shopAll.jsp';
+		})
 	})
 </script>
 </head>
@@ -361,7 +426,7 @@ for(CartDTO cart : cartList){
 		</table>
 		<div class="d5">
 			<input type="button" value="주문하기" id="btn_buy_select3">&ensp;&ensp;
-			<input type="button" value="쇼핑계속하기" id="btn_shop">
+			<input type="button" value="쇼핑계속하기" id="btn_shopping">
 		</div>
 		<hr class="d_line2">
 	</div>

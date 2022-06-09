@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="mall.cart.*" %>
+<%@ page import="mall.cart.*, java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +26,26 @@ if(memberId == null){
 
 // DB 연결, 질의
 CartDAO cartDAO = CartDAO.getInstance();
+
+// 장바구니 중복 상품 확인
+// 이미 존재하는 상품이면 수량을 수정하고, 존재하지 않는 상품이면 상품을 추가하도록 함.
+// cart_id, product_id, buy_count
+int cart_id = 0;
+int buy_count = 0;
+List<CartDTO> cartList = cartDAO.getCartList(memberId);
+for(CartDTO dto : cartList){
+	if(dto.getProduct_id() == cart.getProduct_id()){
+		cart_id = dto.getCart_id();
+		buy_count = dto.getBuy_count();
+	}
+}
+
+if(cart_id == 0){ // 카트에 새 상품을 추가
+	
+}else{ // 이미 존재하는 상품
+	
+}
+
 int check = cartDAO.insertCart(cart);
 
 out.print("<script>");
