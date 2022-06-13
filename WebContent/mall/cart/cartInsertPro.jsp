@@ -15,6 +15,7 @@ String memberId = (String)session.getAttribute("memberId");
 if(memberId == null){
 	out.print("<script>alert('로그인을 해주세요');");
 	out.print("location='../logon/memberLoginForm.jsp';</script>");
+	return;
 }
 %>
 <jsp:useBean id="cart" class="mall.cart.CartDTO" />
@@ -41,20 +42,14 @@ for(CartDTO dto : cartList){
 }
 
 if(cart_id == 0){ // 카트에 새 상품을 추가
-	
+	cartDAO.insertCart(cart);
 }else{ // 이미 존재하는 상품
-	
+	cartDAO.updateCart(cart_id, buy_count + cart.getBuy_count());
 }
 
-int check = cartDAO.insertCart(cart);
+response.sendRedirect("cartList.jsp");
 
-out.print("<script>");
-if(check == 0){
-	out.print("alert('장바구니 추가에 실패하였습니다.');history.back();");
-}else{
-	out.print("location='cartList.jsp'");
-}
-out.print("</script>");
+
 %>
 </body>
 </html>

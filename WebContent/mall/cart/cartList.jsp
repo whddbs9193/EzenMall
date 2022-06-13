@@ -12,13 +12,13 @@
 #container{width: 1200px; margin: 0 auto;}
 .cart_list{width: 100%}
 /* 상단 d1 */
-.d1{width: 43%; padding:15px; margin: 15px 45px; float:left; display: inline-block;}
+.d1{width: 43%; padding:15px; margin: 15px 45px; float:right; display: inline-block;}
 .d1 .s1{font-size: 1.1em; font-weight: bold; margin-right: 30px;}
 .d1 .s2, .d1 .s3{display:inline-block; width:150px; text-align:center; padding: 6px 17px; border:1px solid gray; font-weight: bold; font-size: 0.8em; border-radius: 15px;}
 .d1 .s2{background: #333; color:#fff; z-index: 1; position: relative;}
 .d1 .s3{background: #fff; color:#333; margin-left: -30px; z-index:-1; position: relative;}
 /* 상단 d2 */
-.d2{width: 34%; padding:15px;margin: 5px 45px; float: right; display: inline-block; text-align: right;}
+.d2{width: 34%; padding:15px; margin: 5px 45px; float: left; display: inline-block; text-align: left;}
 .d_line{clear:both; width:90%; border: 1px solid lightgray;}
 /* 상단 d3 */
 .d3 {width: 90%; padding: 15px; margin: 5px 45px; float:left;}
@@ -42,6 +42,7 @@ border-left: none; border-right: none; clear: both;}
 .td0{text-align: center; font-weight: bold; font-size:1.1em; padding: 30px 0;}
 .td1 .ck_cart_one{zoom: 1.5;}
 .td3 .s1{ font-weight: bold; color: #1e94be;}
+.td3 .s1 a{text-decoration: none; color:#1e94be;}
 .td3 .s2{font-size:0.9em; color: gray;}
 .td3 .s3{font-size:0.9em; color: gray; text-decoration: line-through;}
 .td3 .s4, .td3 .s5{font-weight: bold; color: #c84557;}
@@ -138,6 +139,29 @@ padding: 5px; font-size:0.9em;}
 				location = '../buy/buyForm.jsp?cart_id=' + cart_ids[i].value;
 			})
 		}
+		////////////////////
+		// 판매가 계산(원가에서 할인된 가격)
+		let p_sums = document.getElementsByName("p_sum");
+		let p_s1 = 0;
+		let c1_s1 = document.querySelector(".c1_s1");
+		let c2_s1 = document.querySelector(".c2_s1");
+		let c3_s1 = document.querySelector(".c3_s1");
+		
+		// 원가 계산
+		let p_sums2 = document.getElementsByName("p_sum2");
+		let p_s2 = 0;
+		let c1_s2 = document.querySelector(".c1_s2");
+		
+		// 할인가 계산
+		let p_sums3 = document.getElementsByName("p_sum3");
+		let p_s3 = 0;
+		let c1_s3 = document.querySelector(".c1_s3");
+		
+		// 종, 개수 계산
+		let k_count = 0;
+		let p_count = 0;
+		let c1_s4 = document.querySelector(".c1_s4");
+		let c1_s5 = document.querySelector(".c1_s5");
 		
 		////////////////////////////////
 		// 전체 선택 체크박스 처리
@@ -147,18 +171,27 @@ padding: 5px; font-size:0.9em;}
 		let ck_cart_all = document.getElementById("ck_cart_all");
 		
 		ck_cart_all.addEventListener("change",function(){
+			p_s1 = 0;
+			p_s2 = 0;
+			p_s3 = 0;
+			k_count = 0;
+			p_count = 0;
 			if(ck_cart_all.checked == true){ // 전체 선택을 체크하였을 때 -> 하위의 모든 체크박스를 선택
 				ck_count = ck_cart_ones.length;
 				for(let i = 0; i < ck_cart_ones.length; i++){
 					ck_cart_ones[i].checked = true;
 					cart_ids_list.push(cart_ids[i].value);
+					p_s1 += parseInt(p_sums[i].value);
+					p_s2 += parseInt(p_sums2[i].value);
+					p_s3 += parseInt(p_sums3[i].value);
+					++k_count;
+					p_count += parseInt(buy_counts[i].value);
 				}
 			}else{ // 전체 선택을 해제해였을 때 -> 하위의 모든 체크박스를 해제
 				ck_count = 0;
 				cart_ids_list = [];
 				for(let i=0; i<ck_cart_ones.length; i++){
 					ck_cart_ones[i].checked = false;
-					
 				}
 			}
 			cart_ids_list = [...new Set(cart_ids_list)]; // 중복 카트 아이디를 제거
@@ -169,18 +202,35 @@ padding: 5px; font-size:0.9em;}
 		// 각 상품별 체크박스가 모두 체크되었다면 전체 선택 체크박스를 선택
 		for(let i = 0; i<ck_cart_ones.length; i++){
 			ck_cart_ones[i].addEventListener("change",function(){
-				if(ck_cart_ones[i].checked == false ){
+				if(ck_cart_ones[i].checked == false ){ // 체크 해제
 					ck_cart_all.checked = false;
 					--ck_count;
 					cart_ids_list = cart_ids_list.filter((e) => e !== cart_ids[i].value);
-					
-				}else{
+					p_s1 -= parseInt(p_sums[i].value);
+					p_s2 -= parseInt(p_sums2[i].value);
+					p_s3 -= parseInt(p_sums3[i].value);
+					--k_count;
+					p_count -= parseInt(buy_counts[i].value);
+				}else{ // 체크 선택
 					++ck_count;
 					cart_ids_list.push(cart_ids[i].value);
+					p_s1 += parseInt(p_sums[i].value);
+					p_s2 += parseInt(p_sums2[i].value);
+					p_s3 += parseInt(p_sums3[i].value);
+					++k_count;
+					p_count += parseInt(buy_counts[i].value);
 				}
 				if(ck_count == ck_cart_ones.length){
 					ck_cart_all.checked = true;
 				}
+				c1_s1.innerHTML = p_s1.toLocaleString() + '원';
+				c2_s1.innerHTML = p_s1.toLocaleString() + '원';
+				c3_s1.innerHTML = p_s1.toLocaleString() + '원';
+				
+				c1_s2.innerHTML = p_s2.toLocaleString() + '원';
+				c1_s3.innerHTML = p_s3.toLocaleString() + '원';
+				c1_s4.innerHTML = k_count + '종';
+				c1_s5.innerHTML = p_count + '개';
 				console.log(cart_ids_list);
 			})
 		}
@@ -234,12 +284,13 @@ padding: 5px; font-size:0.9em;}
 </head>
 <body>
 <%
-
 String memberId = (String)session.getAttribute("memberId");
 if(memberId == null){
 	out.print("<script>alert('로그인을 해주세요');");
 	out.print("location='../logon/memberLoginForm.jsp';</script>");
+	return;
 }
+
 SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일");
 DecimalFormat df = new DecimalFormat("#,###,###");
 
@@ -248,10 +299,8 @@ MemberDAO memberDAO = MemberDAO.getInstance();
 MemberDTO member = memberDAO.getMember(memberId);
 
 String address = member.getAddress();
-
-
-
 String local = address.substring(0,2); // 주소에서 2글자만 추출
+
 
 // 배송 날짜 계산과 포맷
 // 규칙1. 서울: 다음날 배송, 경기: 2일 안에 배송, 지방: 3일 안에 배송, 제주도 : 5일 안에 배송.
@@ -332,7 +381,7 @@ for(CartDTO cart : cartList){
 			<span class="s3">아침배송</span>
 		</div>
 		<div class="d2">
-			<img src="../../icons/progress01.PNG" width="300" height="45">
+			<img src="../../icons/progress01.png" width="400" height="60">
 		</div>
 		<hr class="d_line">
 		
@@ -357,6 +406,7 @@ for(CartDTO cart : cartList){
 				discount_rate = cart.getDiscount_rate();
 				buy_price = cart.getBuy_price();
 				buy_count = cart.getBuy_count();
+				
 				p_sum = buy_price * buy_count; // 각 상품의 합계(할인가격 * 주문수량)
 				p_tot += p_sum;               // 총합계(할인가격의 총합계)
 				
@@ -372,11 +422,17 @@ for(CartDTO cart : cartList){
 			<form action="cartUpdatePro.jsp" method="post" name="cartForm">
 			<input type="hidden" name="cart_id" value="<%= cart.getCart_id()%>">
 			<input type="hidden" name="product_id" value="<%=cart.getBuy_count() %>">
+			<input type="hidden" name="p_sum" value="<%=p_sum%>">
+			<input type="hidden" name="p_sum2" value="<%=p_sum2%>">
+			<input type="hidden" name="p_sum3" value="<%=p_sum3%>">
+			
 			<tr>
 				<td class="center td1" width="3%"><input type="checkbox" name="ck_cart_one" class="ck_cart_one"></td>
-				<td class="center td2" width="8%"><img src="/images_ezenmall/<%=cart.getProduct_image()%>" width="60" height="90"></td>
+				<td class="center td2" width="8%">
+					<a href="../shopping/shopContent.jsp?product_id=<%=cart.getProduct_id() %>"><img src="/images_ezenmall/<%=cart.getProduct_image()%>" width="60" height="90"></a>
+				</td>
 				<td class="left td3" width="48%">
-					<span class="s1"><%=cart.getProduct_name() %></span><br>
+					<span class="s1"><a href="../shopping/shopContent.jsp?product_id=<%=cart.getProduct_id() %>"><%=cart.getProduct_name() %></a></span><br>
 					<span class="s2"><%=cart.getAuthor() %> | <%=cart.getPublishing_com() %></span><br>
 					<span class="s3"><%=df.format(product_price) %>원</span> | <span class="s4"><%=df.format(buy_price) %>원</span> (<span class="s5"><%=discount_rate %>%할인</span>)
 				</td>
@@ -393,7 +449,7 @@ for(CartDTO cart : cartList){
 			</form>
 			<%} }%>
 			<tr>
-				<th colspan="7">EZENMALL 배송 상품 총 금액 : <b><%=df.format(p_tot) %></b> 원(+배송비 0원)</th>
+				<th colspan="7">EZENMALL 배송 상품 총 금액 : <b class="c1_s1"></b> 원(+배송비 0원)</th>
 			</tr>
 		</table>
 		<div class="d4">
@@ -403,18 +459,18 @@ for(CartDTO cart : cartList){
 		</div>
 		<table class="t_cart_tot">
 			<tr>
-				<th>총 상품금액<br><span class="s1"><%=df.format(p_tot) %></span>원</th>
-				<th><img src="../../icons/plus.PNG" width="40"></th>
+				<th>총 상품금액<br><span class="s1 c2_s1">0원</span></th>
+				<th><img src="../../icons/plus.PNG" width="30"></th>
 				<th>총 추가금액<br><span class="s2"><%=0 %></span>원</th>
-				<th><img src="../../icons/minus.PNG" width="40"></th>
+				<th><img src="../../icons/minus.PNG" width="30"></th>
 				<th>총 할인금액<br><span class="s3"><%=0 %></span>원</th>
-				<th><img src="../../icons/equal.PNG" width="40"></th>
-				<th>최종 결제금액<br><span class="s4"><%=df.format(p_tot) %></span>원</th>
+				<th><img src="../../icons/equal.PNG" width="30"></th>
+				<th>최종 결제금액<br><span class="s4 c3_s1">0원</span></th>
 			</tr>
 			<tr>
 				<th colspan="7">
-					<span>정가 <b><%=df.format(p_tot2) %> 원</b> 에서<b> <%=df.format(p_tot3) %> 원</b> 할인</span><br>
-					<span>총 주문수량: <%=k_count %>종 (<%=p_count %>개)</span>
+					<span>정가 <b class="c1_s2">0원</b> 에서<b class="c1_s3">0원</b> 할인</span><br>
+					<span>총 주문수량: <b class="c1_s4">0종</b> (<b class="c1_s5">0개</b>)</span>
 				</th>
 			</tr>
 		</table>

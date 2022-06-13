@@ -13,6 +13,7 @@ String memberId = (String)session.getAttribute("memberId");
 if(memberId == null){
 	out.print("<script>alert('로그인을 해주세요');");
 	out.print("location='../logon/memberLoginForm.jsp';</script>");
+	return;
 }
 
 int cart_id = Integer.parseInt(request.getParameter("cart_id"));

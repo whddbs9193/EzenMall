@@ -177,6 +177,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 if(memberId == null){
 	out.print("<script>location='../logon/memberLoginForm.jsp'</script>");
+	return;
 }
 // 아래는 세션 memberID가 있을때
 MemberDAO memberDAO = MemberDAO.getInstance();

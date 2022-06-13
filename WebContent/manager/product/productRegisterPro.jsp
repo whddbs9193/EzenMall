@@ -33,7 +33,7 @@ try{
 	}
 	
 }catch(Exception e){
-	System.out.println("productUpdatePro.jsp 파일" + e.getMessage());
+	System.out.println("productRegisterPro.jsp 파일" + e.getMessage());
 	e.printStackTrace();
 }
 

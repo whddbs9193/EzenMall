@@ -17,7 +17,7 @@
 .new_items .slider{width: 100%;}
 /* 추천상품 */
 .good_items{text-align: center;}
-.good_items .slider{width: 100%;}
+.good_items .slider{width: 50%; }
 .c_good_img{transition: transform, 0.5s;}
 .c_good_img:hover{transform: scale(1.05);}
 /* 상품 종류별 보기 */
@@ -89,9 +89,9 @@
 					<%} %>
 					</div>
 				</article>
-				<article class="best_items"> <%-- 메인3: 베스트셀러(주문수량이 가장 많은 상품 20개를 가져와서 노출) --%>
+				<%--<article class="best_items">  메인3: 베스트셀러(주문수량이 가장 많은 상품 20개를 가져와서 노출) 
 				
-				</article>
+				</article>--%>
 				<article class=""> <%-- 메인4: 상품 종류별로 나열되도록 설정한 영역 --%>
 					<jsp:include page="shopMain.jsp" />
 				</article>

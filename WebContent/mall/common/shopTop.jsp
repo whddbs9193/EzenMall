@@ -64,50 +64,50 @@ String memberId = (String)session.getAttribute("memberId");
 		<div class="m_menu mm1">
 			<a href="#">소설/시</a>
 			<div class="s_menu sm1">
-				<div><a href="shopAll.jsp?product_kind=110#t_kind">소설/시</a></div>
-				<div><a href="shopAll.jsp?product_kind=120#t_kind">에세이</a></div>
+				<div><a href="/EzenMall/mall/shopping/shopAll.jsp?product_kind=110#t_kind">소설/시</a></div>
+				<div><a href="/EzenMall/mall/shopping/shopAll.jsp?product_kind=120#t_kind">에세이</a></div>
 			</div>
 		</div>
 		<div class="m_menu mm2">
 			<a href="#">인문</a>
 			<div class="s_menu sm2">
-				<div><a href="shopAll.jsp?product_kind=210#t_kind">역사</a></div>
-				<div><a href="shopAll.jsp?product_kind=210#t_kind">예술</a></div>
-				<div><a href="shopAll.jsp?product_kind=230#t_kind">종교</a></div>
-				<div><a href="shopAll.jsp?product_kind=240#t_kind">사회</a></div>
-				<div><a href="shopAll.jsp?product_kind=250#t_kind">과학</a></div>
+				<div><a href="/EzenMall/mall/shopping/shopAll.jsp?product_kind=210#t_kind">역사</a></div>
+				<div><a href="/EzenMall/mall/shopping/shopAll.jsp?product_kind=210#t_kind">예술</a></div>
+				<div><a href="/EzenMall/mall/shopping/shopAll.jsp?product_kind=230#t_kind">종교</a></div>
+				<div><a href="/EzenMall/mall/shopping/shopAll.jsp?product_kind=240#t_kind">사회</a></div>
+				<div><a href="/EzenMall/mall/shopping/shopAll.jsp?product_kind=250#t_kind">과학</a></div>
 			</div>
 		</div>
 		<div class="m_menu mm3">
 			<a href="#">경제/자기계발</a>
 			<div class="s_menu sm3">
-				<div><a href="shopAll.jsp?product_kind=310#t_kind">경제/경영</a></div>
-				<div><a href="shopAll.jsp?product_kind=320#t_kind">자기계발</a></div>
+				<div><a href="/EzenMall/mall/shopping/shopAll.jsp?product_kind=310#t_kind">경제/경영</a></div>
+				<div><a href="/EzenMall/mall/shopping/shopAll.jsp?product_kind=320#t_kind">자기계발</a></div>
 			</div>
 		</div>
 		<div class="m_menu mm4">
 			<a href="#">여행/잡지</a>
 			<div class="s_menu sm4">
-				<div><a href="shopAll.jsp?product_kind=410#t_kind">여행</a></div>
-				<div><a href="shopAll.jsp?product_kind=510#t_kind">잡지</a></div>
+				<div><a href="/EzenMall/mall/shopping/shopAll.jsp?product_kind=410#t_kind">여행</a></div>
+				<div><a href="/EzenMall/mall/shopping/shopAll.jsp?product_kind=510#t_kind">잡지</a></div>
 			</div>
 		</div>
 		<div class="m_menu mm5">
 			<a href="#">가정/건강</a>
 			<div class="s_menu sm5">
-				<div><a href="shopAll.jsp?product_kind=610#t_kind">어린이</a></div>
-				<div><a href="shopAll.jsp?product_kind=620#t_kind">육아</a></div>
-				<div><a href="shopAll.jsp?product_kind=630#t_kind">가정/살림</a></div>
-				<div><a href="shopAll.jsp?product_kind=710#t_kind">건강/취미</a></div>
-				<div><a href="shopAll.jsp?product_kind=720#t_kind">요리</a></div>
+				<div><a href="/EzenMall/mall/shopping/shopAll.jsp?product_kind=610#t_kind">어린이</a></div>
+				<div><a href="/EzenMall/mall/shopping/shopAll.jsp?product_kind=620#t_kind">육아</a></div>
+				<div><a href="/EzenMall/mall/shopping/shopAll.jsp?product_kind=630#t_kind">가정/살림</a></div>
+				<div><a href="/EzenMall/mall/shopping/shopAll.jsp?product_kind=710#t_kind">건강/취미</a></div>
+				<div><a href="/EzenMall/mall/shopping/shopAll.jsp?product_kind=720#t_kind">요리</a></div>
 			</div>
 		</div>
 		<div class="m_menu mm6">
 			<a href="#">IT/수험서</a>
 			<div class="s_menu sm6">
-				<div><a href="shopAll.jsp?product_kind=810#t_kind">IT모바일</a></div>
-				<div><a href="shopAll.jsp?product_kind=910#t_kind">수험서/자격증</a></div>
-				<div><a href="shopAll.jsp?product_kind=920#t_kind">참고서</a></div>
+				<div><a href="/EzenMall/mall/shopping/shopAll.jsp?product_kind=810#t_kind">IT모바일</a></div>
+				<div><a href="/EzenMall/mall/shopping/shopAll.jsp?product_kind=910#t_kind">수험서/자격증</a></div>
+				<div><a href="/EzenMall/mall/shopping/shopAll.jsp?product_kind=920#t_kind">참고서</a></div>
 			</div>
 		</div>
 	</div>
