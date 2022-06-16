@@ -193,9 +193,19 @@ padding: 5px; font-size:0.9em;}
 				for(let i=0; i<ck_cart_ones.length; i++){
 					ck_cart_ones[i].checked = false;
 				}
+				
 			}
 			cart_ids_list = [...new Set(cart_ids_list)]; // 중복 카트 아이디를 제거
 			console.log(cart_ids_list);
+			
+			c1_s1.innerHTML = p_s1.toLocaleString() + '원';
+			c2_s1.innerHTML = p_s1.toLocaleString() + '원';
+			c3_s1.innerHTML = p_s1.toLocaleString() + '원';
+			
+			c1_s2.innerHTML = p_s2.toLocaleString() + '원';
+			c1_s3.innerHTML = p_s3.toLocaleString() + '원';
+			c1_s4.innerHTML = k_count + '종';
+			c1_s5.innerHTML = p_count + '개';
 		})
 		// 각 상품별 체크박스 처리
 		// 각 상품별 체크박스 중에서 해제된 것이 있다면 전체 선택 체크박스를 헤제
@@ -241,7 +251,7 @@ padding: 5px; font-size:0.9em;}
 				alert('장바구니에 상품이 없습니다.');
 				return;
 			}
-			location = 'cartDeletePro2.jsp?cart_ids_list=' + cart_ids_list;
+			location = 'cartDeletePro2.jsp?cart_id=' + cart_ids_list;
 		})
 		
 		btn_delete_select2.addEventListener("click",function(){
@@ -249,7 +259,7 @@ padding: 5px; font-size:0.9em;}
 				alert('장바구니에 상품이 없습니다.');
 				return;
 			}
-			location = 'cartDeletePro2.jsp?cart_ids_list=' + cart_ids_list;
+			location = 'cartDeletePro2.jsp?cart_id=' + cart_ids_list;
 		})
 		
 		// 주문 버튼 처리
@@ -258,21 +268,21 @@ padding: 5px; font-size:0.9em;}
 				alert('장바구니에 상품이 없습니다.');
 				return;
 			}
-			location = '../buy/buyForm.jsp?cart_ids_list=' + cart_ids_list;
+			location = '../buy/buyForm.jsp?cart_id=' + cart_ids_list;
 		})
 		btn_buy_select2.addEventListener("click",function(){
 			if(ck_count==0){
 				alert('장바구니에 상품이 없습니다.');
 				return;
 			}
-			location = '../buy/buyForm.jsp?cart_ids_list=' + cart_ids_list;
+			location = '../buy/buyForm.jsp?cart_id=' + cart_ids_list;
 		})
 		btn_buy_select3.addEventListener("click",function(){
 			if(ck_count==0){
 				alert('장바구니에 상품이 없습니다.');
 				return;
 			}
-			location = '../buy/buyForm.jsp?cart_ids_list=' + cart_ids_list;
+			location = '../buy/buyForm.jsp?cart_id=' + cart_ids_list;
 		})
 		
 		// 쇼핑계속하기 버튼 처리

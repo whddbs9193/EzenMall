@@ -85,7 +85,7 @@
 					<h3>추천상품</h3>
 					<div class="slider">
 						<%for(ProductDTO product : goodProductList){ %>
-						<a href="shopContent.jsp?product_id=<%=product.getProduct_id()%>"><img src="/images_ezenmall/<%=product.getProduct_image() %>" class="c_good_img"></a>
+						<a href="shopContent.jsp?product_code=<%=product.getProduct_id()%>"><img src="/images_ezenmall/<%=product.getProduct_image() %>" class="c_good_img"></a>
 					<%} %>
 					</div>
 				</article>
