@@ -24,10 +24,46 @@ public class BankDAO {
 	private ResultSet rs = null;
 	
 	// 카드 추가
+	public void insertBank(BankDTO dto) {
+		String sql = "insert into bank(card_no, card_com, member_id,member_name) values(?, ?, ?, ?)";
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getCard_no());
+			pstmt.setString(2, dto.getCard_com());
+			pstmt.setString(3, dto.getMember_id());
+			pstmt.setString(4, dto.getMember_name());
+			pstmt.executeUpdate();
+		}catch (Exception e) {
+			System.out.println("=> insertBank() 에러");
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(conn, pstmt);
+		}
+	}
 	
-	// 카드 수정
+	// 카드 삭제(전체) -> 회원 탈퇴시에 트랜잭션 처리
 	
-	// 카드 삭제
+	
+	
+	// 카드 삭제(1개)
+	public void deleteBank(String member_id, String card_no) {
+		String sql ="delete from bank where member_id=? and card_no=?";
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member_id);
+			pstmt.setString(2, card_no);
+			pstmt.executeUpdate();
+		}catch (Exception e) {
+			System.out.println("=> deleteBank() 에러");
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+	}
 	
 	// 카드 전체 보기
 	public List<BankDTO> getBankList(String member_id){

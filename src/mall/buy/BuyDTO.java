@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class BuyDTO {
 
 	// 프로퍼티
-	private int buy_id;
+	private String buy_id;
 	private String buyer;
 	private int product_id;
 	private String product_name;
@@ -19,7 +19,7 @@ public class BuyDTO {
 	private String delivery_address;
 	private String delivery_state;
 
-	public int getBuy_id() {
+	public String getBuy_id() {
 		return buy_id;
 	}
 
@@ -71,7 +71,7 @@ public class BuyDTO {
 		return delivery_state;
 	}
 
-	public void setBuy_id(int buy_id) {
+	public void setBuy_id(String buy_id) {
 		this.buy_id = buy_id;
 	}
 

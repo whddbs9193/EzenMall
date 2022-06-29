@@ -14,7 +14,7 @@
 	2. session.removeAttribute(세션이름); 세션이름에 해당하는 세션만 삭제 
 	*/
 	
-	session.removeAttribute("memberId");
+	session.invalidate();
 	%>
 	<script>
 		alert('로그아웃 하였습니다.');

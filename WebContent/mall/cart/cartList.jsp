@@ -124,7 +124,6 @@ padding: 5px; font-size:0.9em;}
 		}
 		
 		// 각 상품별 삭제 버튼 처리(1개 상품)
-		
 		let btn_delete_ones = document.querySelectorAll(".btn_delete_one");
 		for(let i=0; i<btn_delete_ones.length; i++){
 			btn_delete_ones[i].addEventListener("click",function(){
@@ -136,7 +135,7 @@ padding: 5px; font-size:0.9em;}
 		let btn_buy_ones = document.querySelectorAll(".btn_buy_one");
 		for(let i = 0; i < btn_buy_ones.length; i++){
 			btn_buy_ones[i].addEventListener("click",function(){
-				location = '../buy/buyForm.jsp?cart_id=' + cart_ids[i].value;
+				location = '../buy/buyForm.jsp?cart_id=' + cart_ids[i].value + "&part=3";
 			})
 		}
 		////////////////////
@@ -251,7 +250,7 @@ padding: 5px; font-size:0.9em;}
 				alert('장바구니에 상품이 없습니다.');
 				return;
 			}
-			location = 'cartDeletePro2.jsp?cart_id=' + cart_ids_list;
+			location = 'cartDeletePro2.jsp?cart_id=' + cart_ids_list + "&part=3";
 		})
 		
 		btn_delete_select2.addEventListener("click",function(){
@@ -259,7 +258,7 @@ padding: 5px; font-size:0.9em;}
 				alert('장바구니에 상품이 없습니다.');
 				return;
 			}
-			location = 'cartDeletePro2.jsp?cart_id=' + cart_ids_list;
+			location = 'cartDeletePro2.jsp?cart_id=' + cart_ids_list + "&part=3";
 		})
 		
 		// 주문 버튼 처리
@@ -268,21 +267,21 @@ padding: 5px; font-size:0.9em;}
 				alert('장바구니에 상품이 없습니다.');
 				return;
 			}
-			location = '../buy/buyForm.jsp?cart_id=' + cart_ids_list;
+			location = '../buy/buyForm.jsp?cart_id=' + cart_ids_list + "&part=3";
 		})
 		btn_buy_select2.addEventListener("click",function(){
 			if(ck_count==0){
 				alert('장바구니에 상품이 없습니다.');
 				return;
 			}
-			location = '../buy/buyForm.jsp?cart_id=' + cart_ids_list;
+			location = '../buy/buyForm.jsp?cart_id=' + cart_ids_list + "&part=3";
 		})
 		btn_buy_select3.addEventListener("click",function(){
 			if(ck_count==0){
 				alert('장바구니에 상품이 없습니다.');
 				return;
 			}
-			location = '../buy/buyForm.jsp?cart_id=' + cart_ids_list;
+			location = '../buy/buyForm.jsp?cart_id=' + cart_ids_list + "&part=3";
 		})
 		
 		// 쇼핑계속하기 버튼 처리

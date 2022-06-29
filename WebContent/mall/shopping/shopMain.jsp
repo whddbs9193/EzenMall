@@ -1,3 +1,4 @@
+<%@page import="mall.cart.CartDAO"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -134,7 +135,7 @@ int cnt = productDAO.getProductCount(product_kind);
 	<div class="d_kind2">상품수: 총 <b class="s_kind21"><%=cnt %></b>건</div>
 		<%for(ProductDTO product : productList){ %>
 		<div class="d_kind3">
-		<a href="shopContent.jsp?product_id=<%=product.getProduct_id() %>">
+		<!-- <a href="shopContent.jsp?product_id=<%=product.getProduct_id() %>"></a>-->
 		<div class="c_product">
 			<div class="c_p1"><img src="/images_ezenmall/<%=product.getProduct_image() %>" width="200" height="280"></div>
 			<div class="c_p2"><span title="<%=product.getProduct_name() %>"><%=product.getProduct_name() %></span></div>
@@ -142,14 +143,12 @@ int cnt = productDAO.getProductCount(product_kind);
 			<div class="c_p4"><span><%=df.format(product.getProduct_price()) %>원</span>(<span class="c_p55"><%=product.getDiscount_rate() %>% 할인</span>)</div>
 		</div>
 		<div class="c_product2">
-			<a href="#"><div class="c_p5">구매</div></a>
+			<a href="../buy/buyForm.jsp?product_id=<%=product.getProduct_id()%>&part=1"><div class="c_p5">구매</div></a>
 			<a href="shopContent.jsp?product_id=<%=product.getProduct_id() %>"><div class="c_p6">상세</div></a>
 		</div>
-		</a>
 		</div>
 		<%} %>
 		<%-- 하단: 페이징 처리 --%>
-		<%-- 하단 페이징 --%>
 		<br>
 	<div id="paging">
 	<%

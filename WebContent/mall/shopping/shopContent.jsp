@@ -66,11 +66,14 @@ text-align: center; line-height: 30px; border-radius: 5px; color: #fff; font-siz
 .main_end{margin: 60px 0 20px;}
 
 /* number 화살표 항상 보이는 효과 */
-.s2_
+.s2_d6 input[type=number]::-webkit-inner-spin-button, 
+.s2_d6 input[type=number]::-webkit-outer-spin-button {-webkit-appearance: "Always Show Up/Down Arrows"; opacity: 1;}
 </style>
 <script>
 	document.addEventListener("DOMContentLoaded", function(){
 		// 이미지 변화 효과
+		let form = document.contentForm;
+		
 		let big_img = document.querySelector(".big_img");
 		let thumb_imgs = document.querySelectorAll(".thumb");
 		
@@ -90,16 +93,24 @@ text-align: center; line-height: 30px; border-radius: 5px; color: #fff; font-siz
 			}
 		})
 		
+		// 구매하기 버튼
+		let btn_buy = document.getElementById("btn_buy");
+		btn_buy.addEventListener("click",function(){
+			location = "../buy/buyForm.jsp?product_id="+form.product_id.value+"&buy_count="+form.buy_count.value+"&part=2";
+		})
+		
 		// 하단 - 상세설명, 상품리뷰 변환 효과
 		let s3_c2 = document.querySelector(".s3_c2");
 		let s3_c3 = document.querySelector(".s3_c3");
 		let ss1 = document.querySelector(".ss1");
 		let ss2 = document.querySelector(".ss2");
 		ss1.addEventListener("click",function(){
-			
+			s3_c2.style.display = "block";
+			s3_c3.style.display = "none";
 		})
 		ss2.addEventListener("click",function(){
-			
+			s3_c2.style.display = "none";
+			s3_c3.style.display = "block";
 		})
 		// 내용 전체 보기 효과
 		let content = document.querySelectorAll(".s3_content");
@@ -261,9 +272,11 @@ if(product.getProduct_image4().equals("nothing.jpg")) prodcut.setProduct_image4(
 		</div>
 		<%-- 구역2: 오른쪽 상단, 상품 기본 정보, 버튼 --%>
 		<form action="../cart/cartInsertPro.jsp" method="post" name="contentForm">
-		<%-- 장바구니로 이동: cart_id, buy_count를 제외한 5가지 필드 정보 --%>
-		<input type="hidden" name="buyer" value="<%=memberId %>">
+		<%-- buyForm.jsp(구매하기)로 이동: product_id --%>
 		<input type="hidden" name="product_id" value="<%=product_id%>">
+		
+		<%-- cartList.jsp로 이동: cart_id, buy_count를 제외한 9가지 필드 정보 --%>
+		<input type="hidden" name="buyer" value="<%=memberId %>">
 		<input type="hidden" name="product_name" value="<%=product.getProduct_name()%>">
 		<input type="hidden" name="author" value="<%=product.getAuthor() %>">
 		<input type="hidden" name="publishing_com" value="<%=product.getPublishing_com()%>">

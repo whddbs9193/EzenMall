@@ -157,11 +157,12 @@ public class MemberDAO {
 		return cnt;
 	}
 	
-	// 회원 삭제(탈퇴) 메소드 -> 해당 회원이 남긴 게시판의 글도 모두 삭제되도록 변경
+	// 회원 삭제(탈퇴) 메소드 -> 해당 회원이 남긴 리뷰, 카트 정보도 모두 삭제, 구매정보는 삭제하지 않음
 	// 트랜잭션 처리(Transaction) 처리
 	public int deleteMember(String id,String pwd) throws Exception {
 		String sql1 = "delete from member where id = ? and pwd = ?";
-		String sql2 = "delete from board where writer =?";
+		String sql2 = "delete from review where member_id =?";
+		String sql3 = "delete from cart where buyer = ?";
 		int cnt = 0;
 		
 		try {
@@ -178,20 +179,23 @@ public class MemberDAO {
 			pstmt = conn.prepareStatement(sql1);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
-			cnt = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			
-			// 2작업: 해당 회원이 남긴 게시판 글 모두 삭제
+			// 2작업: 회원이 남긴 리뷰 모두 삭제
 			pstmt = conn.prepareStatement(sql2);
 			pstmt.setString(1, id);
 			pstmt.executeUpdate();
 			
-			if(cnt > 0) cnt = 1; // 아이디가 있을 때
-			else cnt = 0; // 아이디가 없을 때 
+			// 3작업: 회원의 모든 카트 정보 삭제
+			pstmt = conn.prepareStatement(sql3);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
 			
 			// 트랜잭션 2단계 - 모든 작업이 완료 되었을 때 커밋
 			conn.commit();
 			// 드랜잭션 3단계 - autocommit 기능을 다시 설정함.
 			conn.setAutoCommit(true);
+			cnt = 1;
 			
 		}catch (Exception e) {
 			// 트랜잭션 처리시에 예외가 발생했을 때 롤백을 함.
